@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<project name="test" default="build" basedir="..">
+	<!-- set global properties for this build -->
+	<property name="src" location="src" />
+	<property name="bin" location="bin" />
+	<property name="lib" location="lib" />
+	<property name="build" location="build" />
+
+	<path id="build.classpath">
+		<fileset dir="${bin}"><include name="*"/></fileset>
+		<fileset dir="lib"><include name="*.jar"/></fileset>
+		<fileset dir="lib/self"><include name="*.jar"/></fileset>
+	</path>
+
+	<target name="init">
+		<!-- Create the time stamp -->
+		<tstamp />
+		<delete dir="${build}" />
+		<mkdir dir="${build}" />
+		<mkdir dir="${build}/lib" />
+		<mkdir dir="${build}/db_desc" />
+	</target>
+
+	<target name="compile" depends="init" description="Compile the source">		
+		<javac srcdir="${src}" destdir="${bin}" debug="on">
+		    	<classpath refid="build.classpath"/>  
+		</javac>
+	</target>
+	
+	<target name="jar" depends="compile" description="generate the distribution" >
+		<jar basedir="${bin}" destfile="${build}/test.jar"/>
+	    <buildnumber file="build.number"/>	
+		<jar jarfile="${lib}/self/serverboot.jar" manifest="${bin}/META-INF/MANIFEST.MF" update="true"/>
+		<jar jarfile="${lib}/self/serverboot_dog.jar" manifest="${bin}/META-INF/MANIFEST.MF" update="true"/>
+  	</target>
+	
+	<target name="build" depends="jar" description="generate the distribution">		
+		<copy todir="${build}/db_desc">
+				<fileset dir="db_desc">
+					<include name="**/*.xml"/>
+				</fileset>
+		</copy>
+		<copy todir="${build}/lib/" flatten="true">
+			<fileset dir="${lib}/">
+				<include name="**/*.jar"/>
+				<exclude name="**/serverboot*"/>
+			</fileset>
+		</copy>
+		<copy todir="${build}/" flatten="true">
+			<fileset dir="${lib}/">
+				<include name="**/serverboot*"/>
+			</fileset>
+		</copy>
+		<copy todir="${build}/conf">
+			<fileset dir="conf/">
+				<include name="**/*.*"/>
+			</fileset>
+		</copy>
+		<copy todir="${build}">
+			<fileset dir=".">
+				<include name="server.sh"/>
+				<include name="server.bat"/>
+			</fileset>
+		</copy>
+	</target>
+</project>
