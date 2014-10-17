@@ -7,5 +7,6 @@
    	   
    	   <var name="chongqing_url" value="https://wexpress-mobipay.ymcft.com:4431/MobilePay/MobilePayService.aspx" desc="重庆地址"/>
    	   <var name="chongqing_times" value="100" desc="重庆连接次数"/>
+   	   <var name="debug" value="true" desc="" />
    	 </group>
 </var-set>

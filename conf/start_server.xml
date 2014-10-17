@@ -68,26 +68,35 @@
 		<para key="enable_stack" value="true" desc="数据库连接使用超时，是否打印堆栈信息"/>
 		<para key="heart_sql" value="" desc="数据库心跳检测语句"/>
 	</server>
+	
 	<server>
-		<server_name>Test服务</server_name>
+		<server_name>TestJsoup服务</server_name>
 		<desc>Test服务</desc>
-		<class_name>com.server.TestServer</class_name>
+		<class_name>com.server.JsoupTestServer</class_name>
 		<create_method>getSingleInstance</create_method>
 		<enable_server>true</enable_server>
+		<failure_system_exit>false</failure_system_exit>
+	</server>
+	<server>
+		<server_name>HttpClientTestServer服务</server_name>
+		<desc>HttpClientTestServer服务</desc>
+		<class_name>com.server.HttpClientTestServer</class_name>
+		<create_method>getSingleInstance</create_method>
+		<enable_server>false</enable_server>
 		<failure_system_exit>false</failure_system_exit>
 	</server>
 	
 	<server>
-		<server_name>TestConnection服务</server_name>
-		<desc>Test服务</desc>
+		<server_name>HttpsClientTestServer服务</server_name>
+		<desc>HttpsClientTestServer服务</desc>
 		<class_name>com.server.HttpsClientTestServer</class_name>
 		<create_method>getSingleInstance</create_method>
-		<enable_server>true</enable_server>
+		<enable_server>false</enable_server>
 		<failure_system_exit>false</failure_system_exit>
 	</server>
 	<server>
-		<server_name>TestConnection1服务</server_name>
-		<desc>Test服务</desc>
+		<server_name>HttpsClientTestServer1服务</server_name>
+		<desc>HttpsClientTestServer1服务</desc>
 		<class_name>com.server.HttpsClientTestServer1</class_name>
 		<create_method>getSingleInstance</create_method>
 		<enable_server>false</enable_server>
